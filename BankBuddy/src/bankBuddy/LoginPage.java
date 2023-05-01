@@ -30,6 +30,7 @@ public class LoginPage {
 		f.setSize(500, 500);
 		f.setLayout(null);
 		f.setVisible(true);
+		// testing
 	}
 
 	public static void main(String[] args) {
