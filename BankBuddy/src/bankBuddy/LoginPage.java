@@ -5,7 +5,7 @@ public class LoginPage {
 	
 	JLabel username_label, password_label;
 	JTextField username, password;
-	JButton login_button;
+	JButton login_button, createAcc_button;
 	
 	LoginPage() {
 		JFrame f = new JFrame("Login");
@@ -21,11 +21,16 @@ public class LoginPage {
 		login_button = new JButton("Login");
 		login_button.setBounds(200, 250, 100, 50);
 		
+		// create account
+		createAcc_button = new JButton("Create Account");
+		createAcc_button.setBounds(180, 350, 150, 50);
+		
 		f.add(username);
 		f.add(username_label);
 		f.add(password);
 		f.add(password_label);
 		f.add(login_button);
+		f.add(createAcc_button);
 		
 		f.setSize(500, 500);
 		f.setLayout(null);
