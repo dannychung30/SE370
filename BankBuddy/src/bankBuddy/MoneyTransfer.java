@@ -4,13 +4,15 @@ import java.awt.event.*;
 
 public class MoneyTransfer implements ActionListener {
 	
+	JFrame f;
 	JLabel l1, l2, l3, l4;
+	JButton submit;
 	JTextField amount;
 	JComboBox<String> cb1, cb2, cb3;
 	
 	
 	MoneyTransfer() {
-		JFrame f = new JFrame("Transfer/Withdraw Money");
+		f = new JFrame("Transfer/Withdraw Money");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -45,6 +47,10 @@ public class MoneyTransfer implements ActionListener {
 		amount = new JTextField("", 255);
 		amount.setBounds(170, 250, 200, 50);
 		
+		// submit button
+		submit = new JButton("Submit");
+		submit.setBounds(120, 370, 250, 50);
+		
 		
 		f.add(l1);
 		f.add(cb1);
@@ -54,6 +60,7 @@ public class MoneyTransfer implements ActionListener {
 		f.add(cb3);
 		f.add(l4);
 		f.add(amount);
+		f.add(submit);
 		
 		f.setSize(500, 500);
 		f.setLayout(null);
@@ -69,8 +76,20 @@ public class MoneyTransfer implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = (String) cb1.getSelectedItem();
-	    System.out.println(action);
 		
+		// if user chooses to withdraw money:
+	    if(action.equals("Withdraw")) {
+	    	// remove JComboBox to account
+	    	f.remove(cb3);
+	    	f.revalidate();
+	    	f.repaint();
+	    } 
+	    // if user chooses to transfer money:
+	    if(action.equals("Transfer")) {
+	    	// keep to account
+	    	f.add(cb3);
+	    }
+	    
 	}
 
 }
