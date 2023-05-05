@@ -1,46 +1,49 @@
 package bankBuddy;
 import javax.swing.*;
 import java.awt.event.*;
-//import java.awt.*;
 
-public class MoneyTransfer implements ItemListener {
+public class MoneyTransfer implements ActionListener {
 	
 	JLabel l1, l2, l3, l4;
 	JTextField amount;
+	JComboBox<String> cb1, cb2, cb3;
+	
 	
 	MoneyTransfer() {
 		JFrame f = new JFrame("Transfer/Withdraw Money");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String[] choices1 = { "", "Transfer", "Withdraw"};
-		String[] choices2 = { "", "Checkings", "Savings"};
+		
+		String[] choices1 = { "Transfer", "Withdraw"};
+		String[] choices2 = {"Checkings", "Savings"};
 		
 		// choose action
 		l1 = new JLabel("Choose Action: ");
 		l1.setBounds(100, 50, 150, 50);
-		JComboBox<String> cb1 = new JComboBox<String>(choices1);
+		cb1 = new JComboBox<String>(choices1);
 		cb1.setBounds(250, 50, 200, 50);
-		//Object obj = cb1.getSelectedItem(); 
-		//String x = cb1.getSelectedItem().toString();
-		//System.out.print(obj);
+		cb1.setSelectedIndex(-1);
+		cb1.addActionListener(this);
 		
 		// from account
 		l2 = new JLabel("From Account: ");
 		l2.setBounds(100, 100, 150, 50);
-		JComboBox<String> cb2 = new JComboBox<String>(choices2);
+		cb2 = new JComboBox<String>(choices2);
 		cb2.setBounds(250, 100, 200, 50);
+		cb2.setSelectedIndex(-1);
 
 		// to account
 		l3 = new JLabel("To Account: ");
 		l3.setBounds(100, 150, 150, 50);
-		JComboBox<String> cb3 = new JComboBox<String>(choices2);
+		cb3 = new JComboBox<String>(choices2);
 		cb3.setBounds(250, 150, 200, 50);
+		cb3.setSelectedIndex(-1);
 		
 		// enter amount
-		l4 = new JLabel("Amount: ");
+		l4 = new JLabel("Amount: $");
 		l4.setBounds(100, 250, 150, 50);
-		amount = new JTextField("", 150);
-		amount.setBounds(220, 250, 200, 50);
+		amount = new JTextField("", 255);
+		amount.setBounds(170, 250, 200, 50);
 		
 		
 		f.add(l1);
@@ -51,22 +54,22 @@ public class MoneyTransfer implements ItemListener {
 		f.add(cb3);
 		f.add(l4);
 		f.add(amount);
+		
 		f.setSize(500, 500);
 		f.setLayout(null);
 		f.setVisible(true);
-		
-		//String s=String.valueOf(cb1.getSelectedItem());
-		//System.out.println(s);
 	
 	}
 
 	public static void main(String[] args) {
 		
-		MoneyTransfer mt = new MoneyTransfer();
+		new MoneyTransfer();
 
 	}
-	
+	@Override
 	public void actionPerformed(ActionEvent e) {
+		String action = (String) cb1.getSelectedItem();
+	    System.out.println(action);
 		
 	}
 
