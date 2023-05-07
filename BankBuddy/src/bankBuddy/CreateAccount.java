@@ -1,11 +1,14 @@
 package bankBuddy;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class CreateAccount {
 	
 	JLabel username_label, password_label, confirm_password_label, email_label;
 	JTextField username, password, confirm_password, email;
-	JButton create_button;
+	JButton create_button, back_btn;
 	
 	CreateAccount() {	
 		
@@ -33,6 +36,9 @@ public class CreateAccount {
 		
 		create_button = new JButton("<html>Create<br>Account</html>");
 		create_button.setBounds(200, 325, 100, 50);
+		
+		back_btn = new JButton("<- Back");
+		back_btn.setBounds(10, 10, 75, 25);
 	
 		
 		f.add(email_label);
@@ -44,11 +50,19 @@ public class CreateAccount {
 		f.add(confirm_password_label);
 		f.add(confirm_password);
 		f.add(create_button);
+		f.add(back_btn);
 		
 		f.setSize(500, 500);
 		f.setLayout(null);
 		f.setVisible(true);
-		// testing comment
+
+		// takes you back to the FirstPage frame
+		back_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FirstPage();
+				f.dispose();
+			}
+		});
 		
 	}
 
