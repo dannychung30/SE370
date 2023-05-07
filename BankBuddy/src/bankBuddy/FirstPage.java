@@ -4,6 +4,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class FirstPage {
 	
@@ -40,6 +42,22 @@ public class FirstPage {
 		f.add(signup_btn, gbc);
 		
 		f.setVisible(true);
+		
+		// making login button take you to Login Page frame
+		login_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LoginPage();
+				f.dispose();
+			}
+		});
+		
+		 //making create account button take you to Create Account frame
+		signup_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateAccount();
+				f.dispose();
+			}
+		});
 		
 	}
 
