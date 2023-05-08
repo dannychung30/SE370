@@ -10,14 +10,14 @@ public class MoneyTransfer implements ActionListener {
 	JTextField amount;
 	JComboBox<String> cb1, cb2, cb3;
 	
+	String[] choices1 = { "Transfer", "Withdraw"};
+	String[] choices2 = { "Checkings", "Savings"};
+	
 	
 	MoneyTransfer() {
 		f = new JFrame("Transfer/Withdraw Money");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-		String[] choices1 = { "Transfer", "Withdraw"};
-		String[] choices2 = {"Checkings", "Savings"};
+	
 		
 		// choose action
 		l1 = new JLabel("Choose Action: ");
@@ -33,6 +33,7 @@ public class MoneyTransfer implements ActionListener {
 		cb2 = new JComboBox<String>(choices2);
 		cb2.setBounds(250, 100, 200, 50);
 		cb2.setSelectedIndex(-1);
+		cb2.addActionListener(this);
 
 		// to account
 		l3 = new JLabel("To Account: ");
@@ -40,6 +41,7 @@ public class MoneyTransfer implements ActionListener {
 		cb3 = new JComboBox<String>(choices2);
 		cb3.setBounds(250, 150, 200, 50);
 		cb3.setSelectedIndex(-1);
+		cb3.addActionListener(this);
 		
 		// enter amount
 		l4 = new JLabel("Amount: $");
@@ -76,6 +78,7 @@ public class MoneyTransfer implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = (String) cb1.getSelectedItem();
+		String fromAcc = (String) cb2.getSelectedItem();
 		
 		// if user chooses to withdraw money:
 	    if(action.equals("Withdraw")) {
@@ -88,8 +91,20 @@ public class MoneyTransfer implements ActionListener {
 	    if(action.equals("Transfer")) {
 	    	// keep to account
 	    	f.add(cb3);
+	    	
+	    	// once user chooses from account remove other option on to account
+	    	if(fromAcc.equals("Savings")) {
+		    	cb3.setSelectedItem("Checkings");
+		    	//f.add(cb3);
+		    	
+		    }
+	    	if(fromAcc.equals("Checkings")) {
+	    		cb3.setSelectedItem("Savings");
+		    	//f.add(cb3);
+	    	}
+	    	
 	    }
-	    
+	   
 	}
 
 }
