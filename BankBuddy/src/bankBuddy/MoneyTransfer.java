@@ -102,6 +102,7 @@ public class MoneyTransfer implements ActionListener {
 	    if(action.equals("Transfer")) {
 	    	// keep to account
 	    	f.add(cb3);
+	    	f.add(cb2);
 	    	
 	    	// once user chooses from account remove other option on to account
 	    	if(fromAcc.equals("Savings")) {
@@ -112,6 +113,7 @@ public class MoneyTransfer implements ActionListener {
 	    	if(fromAcc.equals("Checkings")) {
 	    		cb3.setSelectedItem("Savings");
 		    	//f.add(cb3);
+	    		//f.add(cb3);
 	    	}
 	    	
 	    }
