@@ -68,6 +68,13 @@ public class HomePage {
 			}
 		});
 		
+		transfer_withdraw_deposit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MoneyTransfer();
+				mainFrame.dispose();
+			}
+		});
+		
 		// going to transfer/withdraw frame 
 		
 	}
