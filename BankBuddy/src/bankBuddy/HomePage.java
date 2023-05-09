@@ -69,6 +69,13 @@ public class HomePage {
 				mainFrame.dispose();
 			}
 		});
+<<<<<<< Updated upstream
+=======
+		
+		// going to transfer/withdraw frame
+		
+		
+>>>>>>> Stashed changes
 	}
 
 	public static void main(String[] args) {

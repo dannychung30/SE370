@@ -83,6 +83,7 @@ public class MoneyTransfer implements ActionListener {
 		// if user chooses to withdraw money:
 	    if(action.equals("Withdraw")) {
 	    	// remove JComboBox to account
+	    	f.add(cb2);
 	    	f.remove(cb3);
 	    	f.revalidate();
 	    	f.repaint();
@@ -90,6 +91,7 @@ public class MoneyTransfer implements ActionListener {
 	    // if user chooses to transfer money:
 	    if(action.equals("Transfer")) {
 	    	// keep to account
+	    	f.add(cb2);
 	    	f.add(cb3);
 	    	
 	    	// once user chooses from account remove other option on to account
