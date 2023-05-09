@@ -6,7 +6,7 @@ public class MoneyTransfer implements ActionListener {
 	
 	JFrame f;
 	JLabel l1, l2, l3, l4;
-	JButton submit;
+	JButton submit, back_btn;
 	JTextField amount;
 	JComboBox<String> cb1, cb2, cb3;
 	
@@ -54,6 +54,10 @@ public class MoneyTransfer implements ActionListener {
 		submit = new JButton("Submit");
 		submit.setBounds(120, 370, 250, 50);
 		
+		//back button 
+		back_btn = new JButton("<- Back");
+		back_btn.setBounds(10, 10, 75, 25);
+		
 		
 		f.add(l1);
 		f.add(cb1);
@@ -64,10 +68,18 @@ public class MoneyTransfer implements ActionListener {
 		f.add(l4);
 		f.add(amount);
 		f.add(submit);
+		f.add(back_btn);
 		
 		f.setSize(500, 500);
 		f.setLayout(null);
 		f.setVisible(true);
+		
+		back_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HomePage();
+				f.dispose();
+			}
+		});
 	
 	}
 
@@ -119,5 +131,6 @@ public class MoneyTransfer implements ActionListener {
 	    }
 	   
 	}
+	
 
 }
