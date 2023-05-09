@@ -22,8 +22,7 @@ public class FirstPage {
 		f.setSize(500, 200);
 		
 		//// FIRST COLUMN ////
-		welcome_msg = new JLabel("<html>Welcome to DCA"
-				+ " Bank Buddy!<br>Please select from the following options.</html>");
+		welcome_msg = new JLabel("<html>Welcome to DCA Bank Buddy!</html>");
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 5;

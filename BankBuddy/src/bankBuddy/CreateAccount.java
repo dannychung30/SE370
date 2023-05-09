@@ -59,7 +59,7 @@ public class CreateAccount {
 		// takes you back to the FirstPage frame
 		back_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FirstPage();
+				new LoginPage();
 				f.dispose();
 			}
 		});

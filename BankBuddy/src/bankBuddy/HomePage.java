@@ -66,7 +66,7 @@ public class HomePage {
 			}
 		});
 		
-		// going to transfer/withdraw fram
+		// going to transfer/withdraw frame 
 		
 	}
 
