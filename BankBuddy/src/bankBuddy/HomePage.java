@@ -12,7 +12,7 @@ import javax.swing.*;
 public class HomePage {
 	
 	JLabel greeting, checking, saving;
-	JMenuItem transfer_withdraw_deposit, sign_out;
+	JMenuItem transfer_withdraw_deposit, statements, sign_out;
 	
 	HomePage() {
 		JFrame mainFrame = new JFrame("Welcome, ");
@@ -23,8 +23,9 @@ public class HomePage {
 		
 		JMenu accountActions = new JMenu("Account Actions");
 		
-		JMenuItem transfer_withdraw_deposit = new JMenuItem("Transfer/Withdraw/Deposit");
-		JMenuItem sign_out = new JMenuItem("Sign Out");
+		transfer_withdraw_deposit = new JMenuItem("Transfer/Withdraw/Deposit");
+		sign_out = new JMenuItem("Sign Out");
+		statements = new JMenuItem("View Statements");
 		
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setSize(400, 400);
@@ -55,6 +56,7 @@ public class HomePage {
 		menuBar.add(sign_out, BorderLayout.EAST);
 		
 		accountActions.add(transfer_withdraw_deposit);
+		accountActions.add(statements);
 		
 		mainFrame.setVisible(true);	
 		
