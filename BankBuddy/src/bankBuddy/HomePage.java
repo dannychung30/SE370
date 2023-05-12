@@ -60,10 +60,10 @@ public class HomePage {
 		
 		mainFrame.setVisible(true);	
 		
-		// go back to first page frame when clicking sign out
+		// go back to login page frame when clicking sign out
 		sign_out.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FirstPage();
+				new LoginPage();
 				mainFrame.dispose();
 			}
 		});
