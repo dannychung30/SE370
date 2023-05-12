@@ -68,6 +68,7 @@ public class HomePage {
 			}
 		});
 		
+		// going to transfer/withdraw frame 
 		transfer_withdraw_deposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MoneyTransfer();
@@ -75,13 +76,17 @@ public class HomePage {
 			}
 		});
 		
-		// going to transfer/withdraw frame 
-		
+		// going to view statements frame
+		statements.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				new MonthlyStatements();
+				mainFrame.dispose();
+			}
+		});
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new HomePage();
 	}
-
 }
