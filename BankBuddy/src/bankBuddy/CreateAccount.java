@@ -1,8 +1,14 @@
 package bankBuddy;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+import java.sql.Statement;
 import javax.swing.*;
+
+import com.mysql.cj.jdbc.Driver;
 
 public class CreateAccount {
 	
@@ -10,7 +16,7 @@ public class CreateAccount {
 	JTextField username, password, confirm_password, email;
 	JButton create_button, back_btn;
 	
-	CreateAccount() {	
+	CreateAccount() {
 		
 		JFrame f = new JFrame("Create Account");
 				
@@ -64,10 +70,30 @@ public class CreateAccount {
 			}
 		});
 		
+		create_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SE370", "root", "password30");
+					Statement stmt = con.createStatement();	
+					String query = "SELECT * FROM users";
+					ResultSet results = stmt.executeQuery(query);
+					
+					while (results.next()) {
+						String username = results.getString("username");
+						String password = results.getString("password");
+						String email = results.getString("email");
+						System.out.println(username + "   " + password + "   " + email);
+					}
+				} catch(Exception e1) {
+					System.out.print(e1);
+				}
+			}
+		});
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		new CreateAccount();
 
 	}

@@ -2,6 +2,8 @@ package bankBuddy;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+import java.util.Properties;
 
 public class LoginPage {
 	
@@ -45,13 +47,13 @@ public class LoginPage {
 				new CreateAccount();
 				f.dispose();
 			}
-		});
-		
+		});	
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub		
 		new LoginPage();
+		
 	}
 
 }
