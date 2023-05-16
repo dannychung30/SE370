@@ -13,8 +13,9 @@ import com.mysql.cj.jdbc.Driver;
 public class CreateAccount {
 	
 	JLabel username_label, password_label, confirm_password_label, email_label;
-	JTextField username, password, confirm_password, email;
+	JTextField username, email;
 	JButton create_button, back_btn;
+	JPasswordField password, confirm_password;
 	
 	CreateAccount() {
 		
@@ -32,12 +33,12 @@ public class CreateAccount {
 		
 		password_label = new JLabel("Password:");
 		password_label.setBounds(150, 155, 200, 50);
-		password = new JTextField("", 255);
+		password = new JPasswordField("", 255);
 		password.setBounds(150, 185, 200, 50);
 		
 		confirm_password_label = new JLabel("Confirm Password: ");
 		confirm_password_label.setBounds(150, 230, 200, 50);
-		confirm_password = new JTextField("", 255);
+		confirm_password = new JPasswordField("", 255);
 		confirm_password.setBounds(150, 260, 200, 50);
 		
 		create_button = new JButton("<html>Create<br>Account</html>");
@@ -75,15 +76,17 @@ public class CreateAccount {
 				try {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SE370", "root", "password30");
 					Statement stmt = con.createStatement();	
-					String query = "SELECT * FROM users";
-					ResultSet results = stmt.executeQuery(query);
-					
-					while (results.next()) {
-						String username = results.getString("username");
-						String password = results.getString("password");
-						String email = results.getString("email");
-						System.out.println(username + "   " + password + "   " + email);
-					}
+					String query = "INSERT INTO users VALUES('"+username.getText()+"', '"+password.getText()+"', '"+email.getText()+"')";
+					stmt.executeUpdate(query);
+					System.out.println("Statement made");
+					//ResultSet results = stmt.executeQuery(query);
+//					
+//					while (results.next()) {
+//						String username = results.getString("username");
+//						String password = results.getString("password");
+//						String email = results.getString("email");
+//						System.out.println(username + "   " + password + "   " + email);
+//					}
 				} catch(Exception e1) {
 					System.out.print(e1);
 				}
@@ -95,7 +98,5 @@ public class CreateAccount {
 		// TODO Auto-generated method stub
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		new CreateAccount();
-
 	}
-
 }
