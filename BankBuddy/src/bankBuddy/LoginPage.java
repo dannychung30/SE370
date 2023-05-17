@@ -5,6 +5,11 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginPage {
 	
@@ -54,9 +59,26 @@ public class LoginPage {
 					String get_user_info_query = "SELECT * FROM users WHERE username = '"+username.getText()+"' AND password = '"+password.getText().toString()+"'";
 					ResultSet user = stmt.executeQuery(get_user_info_query);
 					
+					String get_balance = "SELECT accounts.account_type, accounts.balance FROM accounts, users WHERE users.username = accounts.user AND accounts.user = '"+username.getText()+"'";
+				
 					// checking if username and password are in the database
 					if (user.next()) {
-						new HomePage();
+						ResultSet user_balance = stmt.executeQuery(get_balance);
+						
+						Map <String, String> d = new HashMap<>();
+					    
+						while (user_balance.next()) {
+							// getting account type and balance from query result
+							String account_type = user_balance.getString("account_type");
+							String balance = user_balance.getString("balance");
+							
+							// adding query result into dictionary with account type 
+							// as the key and balance as its value
+							d.put(account_type, balance);
+						}
+						// creating new home page frame and passing in the 
+						// hashmap we just made of the account balances
+						new HomePage(d);
 						f.dispose();
 					} else {
 						JOptionPane.showMessageDialog(f, "Username or Password are incorrect");
