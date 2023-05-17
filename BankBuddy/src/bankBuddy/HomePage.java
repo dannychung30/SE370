@@ -79,7 +79,7 @@ public class HomePage {
 		// going to view statements frame
 		statements.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
-				new MonthlyStatements();
+				//new MonthlyStatements();
 				mainFrame.dispose();
 			}
 		});
