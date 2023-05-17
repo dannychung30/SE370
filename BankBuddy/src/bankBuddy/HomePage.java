@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -13,8 +15,17 @@ public class HomePage {
 	
 	JLabel greeting, checking, saving;
 	JMenuItem transfer_withdraw_deposit, statements, sign_out;
+	private HashMap account;
 	
-	HomePage() {
+	HomePage(Map<String, String> account) {
+		
+		this.account = (HashMap) account;
+		
+		// grabbing the checking's and saving's account balances from
+		// the account hashmap and setting them to separate variables
+		String checking_balance = account.get("CHECKING");
+		String saving_balance = account.get("SAVING");
+		
 		JFrame mainFrame = new JFrame("Welcome, ");
 	
 		JPanel mainPanel = new JPanel();
@@ -38,13 +49,13 @@ public class HomePage {
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		// checking account
-		JLabel checking = new JLabel("<html><strong>Checking</strong></html>");
+		JLabel checking = new JLabel("<html><strong>Checking: </strong>'"+checking_balance+"'</html>");
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		mainPanel.add(checking, gbc);
 		
 		// saving account
-		JLabel saving = new JLabel("<html><strong>Saving</strong></html>");
+		JLabel saving = new JLabel("<html><strong>Saving: </strong>'"+saving_balance+"'</html>");
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		mainPanel.add(saving, gbc);
@@ -87,6 +98,6 @@ public class HomePage {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new HomePage();
+		//new HomePage();
 	}
 }
