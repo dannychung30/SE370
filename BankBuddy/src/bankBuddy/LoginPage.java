@@ -60,7 +60,7 @@ public class LoginPage {
 					ResultSet user = stmt.executeQuery(get_user_info_query);
 					
 					String get_balance = "SELECT accounts.account_type, accounts.balance FROM accounts, users WHERE users.username = accounts.user AND accounts.user = '"+username.getText()+"'";
-				
+			 	
 					// checking if username and password are in the database
 					if (user.next()) {
 						ResultSet user_balance = stmt.executeQuery(get_balance);
@@ -78,7 +78,7 @@ public class LoginPage {
 						}
 						// creating new home page frame and passing in the 
 						// hashmap we just made of the account balances
-						new HomePage(d);
+						new HomePage(d, username.getText());
 						f.dispose();
 					} else {
 						JOptionPane.showMessageDialog(f, "Username or Password are incorrect");
