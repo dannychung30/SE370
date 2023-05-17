@@ -16,17 +16,19 @@ public class HomePage {
 	JLabel greeting, checking, saving;
 	JMenuItem transfer_withdraw_deposit, statements, sign_out;
 	private HashMap account;
+	private String username;
 	
-	HomePage(Map<String, String> account) {
+	HomePage(Map<String, String> account, String username) {
 		
 		this.account = (HashMap) account;
+		this.username = username;
 		
 		// grabbing the checking's and saving's account balances from
 		// the account hashmap and setting them to separate variables
 		String checking_balance = account.get("CHECKING");
 		String saving_balance = account.get("SAVING");
 		
-		JFrame mainFrame = new JFrame("Welcome, ");
+		JFrame mainFrame = new JFrame("Welcome, '"+username+"'");
 	
 		JPanel mainPanel = new JPanel();
 		
