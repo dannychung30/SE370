@@ -82,7 +82,7 @@ public class CreateAccount {
 					// connecting to database
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SE370", "root", "password30");
 					Statement stmt = con.createStatement();	
-					String query = "INSERT INTO users VALUES('"+username.getText()+"', '"+password.getText()+"', '"+email.getText()+"')";
+					String create_new_account_query = "INSERT INTO users VALUES('"+username.getText()+"', '"+password.getText()+"', '"+email.getText()+"')";
 					// checking if all fields of form are empty 
 					if (username.getText().isEmpty() == true || email.getText().isEmpty() == true || password.getText().isEmpty() == true) {
 						String error = "Please fill out all fields of the form";
@@ -90,7 +90,7 @@ public class CreateAccount {
 					} else {
 						// checking if password and confirm passwords are equal
 						if (Arrays.equals(password.getPassword(), confirm_password.getPassword())) {
-							stmt.executeUpdate(query);	
+							stmt.executeUpdate(create_new_account_query);	
 							create_button.setVisible(false);
 							stmt_complete_msg.setVisible(true);
 							email.setText(null);
