@@ -107,7 +107,6 @@ public class MoneyTransfer implements ActionListener {
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SE370", "root", "password30");
 					Statement stmt = con.createStatement();	
 					
-					
 					if (action.equals("Deposit")) {
 						if (toAcc == "CHECKING") {
 							new_balance += Double.parseDouble(amount.getText()) + checking_balance;
@@ -134,7 +133,6 @@ public class MoneyTransfer implements ActionListener {
 						}
 				    } 
 				   if (action.equals("Withdraw")) {
-					   System.out.println("here");
 						if (fromAcc == "CHECKING") {
 							new_balance += checking_balance - Double.parseDouble(amount.getText());
 							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+fromAcc+"' AND accounts.user = '"+user+"'";
@@ -147,7 +145,7 @@ public class MoneyTransfer implements ActionListener {
 							new HomePage(account, user);
 							f.dispose();
 						} else if (fromAcc == "SAVING") {
-							new_balance += Double.parseDouble(amount.getText()) - saving_balance;
+							new_balance += saving_balance - Double.parseDouble(amount.getText()); 
 							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+fromAcc+"' AND accounts.user = '"+user+"'";
 							stmt.executeUpdate(deposit_withdraw_query);
 							
@@ -160,6 +158,47 @@ public class MoneyTransfer implements ActionListener {
 						}
 					} 
 				   if (action.equals("Transfer")) {
+					   if (fromAcc == "CHECKING" && toAcc == "SAVING") {
+						   // subtract money from checking account
+						   Double new_balance_checking = checking_balance - Double.parseDouble(amount.getText());
+						   // add money to saving account
+						   Double new_balance_saving = saving_balance + Double.parseDouble(amount.getText());
+						   
+						   String update_checking_query = "UPDATE accounts SET balance = '"+new_balance_checking+"' WHERE user = '"+user+"' AND account_type = '"+fromAcc+"'";
+						   String update_saving_query = "UPDATE accounts SET balance = '"+new_balance_saving+"' WHERE user = '"+user+"' AND account_type = '"+toAcc+"'";
+						   
+						   stmt.executeUpdate(update_checking_query);
+						   stmt.executeUpdate(update_saving_query);
+						   
+							JOptionPane.showMessageDialog(f, "Transfer complete!");
+							
+							account.replace("CHECKING", String.valueOf(new_balance_checking));
+							account.replace("SAVING", String.valueOf(new_balance_saving));
+							
+							new HomePage(account, user);
+							f.dispose();
+						   
+					   } else if (fromAcc == "SAVING" && toAcc == "CHECKING") {
+						   // subtract money from saving account
+						   Double new_balance_saving = saving_balance - Double.parseDouble(amount.getText());
+						   // add money to checking account
+						   Double new_balance_checking = checking_balance + Double.parseDouble(amount.getText());
+						   
+						   String update_checking_query = "UPDATE accounts SET balance = '"+new_balance_checking+"' WHERE user = '"+user+"' AND account_type = '"+toAcc+"'";
+						   String update_saving_query = "UPDATE accounts SET balance = '"+new_balance_saving+"' WHERE user = '"+user+"' AND account_type = '"+fromAcc+"'";
+						   
+						   stmt.executeUpdate(update_checking_query);
+						   stmt.executeUpdate(update_saving_query);
+						   
+							JOptionPane.showMessageDialog(f, "Transfer complete!");
+							
+							account.replace("CHECKING", String.valueOf(new_balance_checking));
+							account.replace("SAVING", String.valueOf(new_balance_saving));
+							
+							new HomePage(account, user);
+							f.dispose();
+						   
+					   }
 						
 					}
 				} catch(Exception error) {
