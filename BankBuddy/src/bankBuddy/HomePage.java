@@ -84,7 +84,7 @@ public class HomePage {
 		// going to transfer/withdraw frame 
 		transfer_withdraw_deposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MoneyTransfer();
+				new MoneyTransfer(account, username);
 				mainFrame.dispose();
 			}
 		});
