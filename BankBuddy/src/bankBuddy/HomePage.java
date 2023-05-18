@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,9 @@ public class HomePage {
 		
 		this.account = (HashMap) account;
 		this.username = username;
+		
+		DecimalFormat df = new DecimalFormat("#.##");
+		df.setRoundingMode(RoundingMode.CEILING);
 		
 		// grabbing the checking's and saving's account balances from
 		// the account hashmap and setting them to separate variables
@@ -51,13 +56,13 @@ public class HomePage {
 		GridBagConstraints gbc = new GridBagConstraints();
 		
 		// checking account
-		JLabel checking = new JLabel("<html><strong>Checking: </strong>'"+checking_balance+"'</html>");
+		JLabel checking = new JLabel("<html><strong>Checking: </strong>'"+df.format(Double.parseDouble(checking_balance))+"'</html>");
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		mainPanel.add(checking, gbc);
 		
 		// saving account
-		JLabel saving = new JLabel("<html><strong>Saving: </strong>'"+saving_balance+"'</html>");
+		JLabel saving = new JLabel("<html><strong>Saving: </strong>'"+df.format(Double.parseDouble(saving_balance))+"'</html>");
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		mainPanel.add(saving, gbc);
