@@ -1,6 +1,12 @@
 package bankBuddy;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MoneyTransfer implements ActionListener {
 	
@@ -11,10 +17,19 @@ public class MoneyTransfer implements ActionListener {
 	JComboBox<String> cb1, cb2, cb3;
 	
 	String[] choices1 = { "Transfer", "Withdraw", "Deposit"};
-	String[] choices2 = { "Checking", "Saving"};
+	String[] choices2 = { "CHECKING", "SAVING"};
 	
+	private String user;
+	private HashMap account;
 	
-	MoneyTransfer() {
+	MoneyTransfer(Map<String, String> account, String user) {
+		this.account = (HashMap) account;
+		this.user = user;
+		
+		// getting double values of current checking and saving account balance
+		Double checking_balance = Double.parseDouble(account.get("CHECKING"));
+		Double saving_balance = Double.parseDouble(account.get("SAVING"));
+		
 		f = new JFrame("Transfer/Withdraw/Deposit Money");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// test
@@ -75,22 +90,97 @@ public class MoneyTransfer implements ActionListener {
 		
 		back_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new HomePage();
+				//new HomePage();
 				f.dispose();
+			}
+		});
+		
+		submit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Double new_balance = 0.00;
+				
+		    	try {
+		    		String action = (String) cb1.getSelectedItem();
+		    		String fromAcc = (String) cb2.getSelectedItem();
+		    		String toAcc = (String) cb3.getSelectedItem();
+					// connecting to database
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SE370", "root", "password30");
+					Statement stmt = con.createStatement();	
+					
+					
+					if (action.equals("Deposit")) {
+						if (toAcc == "CHECKING") {
+							new_balance += Double.parseDouble(amount.getText()) + checking_balance;
+							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+toAcc+"' AND accounts.user = '"+user+"'";
+							stmt.executeUpdate(deposit_withdraw_query);
+							
+							JOptionPane.showMessageDialog(f, "Deposit complete!");
+							
+							account.replace("CHECKING", String.valueOf(new_balance));
+							
+							new HomePage(account, user);
+							f.dispose();
+						} else if (toAcc == "SAVING") {
+							new_balance += Double.parseDouble(amount.getText()) + saving_balance;
+							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+toAcc+"' AND accounts.user = '"+user+"'";
+							stmt.executeUpdate(deposit_withdraw_query);
+							
+							JOptionPane.showMessageDialog(f, "Deposit complete!");
+							
+							account.replace("SAVING", String.valueOf(new_balance));
+							
+							new HomePage(account, user);
+							f.dispose();
+						}
+				    } 
+				   if (action.equals("Withdraw")) {
+					   System.out.println("here");
+						if (fromAcc == "CHECKING") {
+							new_balance += checking_balance - Double.parseDouble(amount.getText());
+							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+fromAcc+"' AND accounts.user = '"+user+"'";
+							stmt.executeUpdate(deposit_withdraw_query);
+							
+							JOptionPane.showMessageDialog(f, "Withdrawal complete!");
+							
+							account.replace("CHECKING", String.valueOf(new_balance));
+							
+							new HomePage(account, user);
+							f.dispose();
+						} else if (fromAcc == "SAVING") {
+							new_balance += Double.parseDouble(amount.getText()) - saving_balance;
+							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+fromAcc+"' AND accounts.user = '"+user+"'";
+							stmt.executeUpdate(deposit_withdraw_query);
+							
+							JOptionPane.showMessageDialog(f, "Withdrawal complete!");
+							
+							account.replace("SAVING", String.valueOf(new_balance));
+							
+							new HomePage(account, user);
+							f.dispose();
+						}
+					} 
+				   if (action.equals("Transfer")) {
+						
+					}
+				} catch(Exception error) {
+					System.out.print(error);
+				}
 			}
 		});
 	
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
-		new MoneyTransfer();
+		//new MoneyTransfer();
 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = (String) cb1.getSelectedItem();
 		String fromAcc = (String) cb2.getSelectedItem();
+		String toAcc = (String) cb3.getSelectedItem();
 		
 		// if user chooses to deposit money:
 		if(action.equals("Deposit")) {
@@ -117,12 +207,14 @@ public class MoneyTransfer implements ActionListener {
 	    } 
 	    
 	    // once user chooses from account remove other option on to account
-	    if(action.equals("Transfer") && fromAcc == "Checking") {
-	    	cb3.setSelectedItem("Saving");
+	    if(action.equals("Transfer") && fromAcc == "CHECKING") {
+	    	cb3.setSelectedItem("SAVING");
 	    }
-	    if(action.equals("Transfer") && fromAcc == "Saving") {
-	    	cb3.setSelectedItem("Checking");
+	    if(action.equals("Transfer") && fromAcc == "SAVING") {
+	    	cb3.setSelectedItem("CHECKING");
 	    }
+	    
+	    
 	}
 	    	
 	    
