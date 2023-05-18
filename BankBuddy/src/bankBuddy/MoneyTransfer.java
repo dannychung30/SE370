@@ -1,5 +1,6 @@
 package bankBuddy;
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class MoneyTransfer implements ActionListener {
 	
@@ -90,7 +92,7 @@ public class MoneyTransfer implements ActionListener {
 		
 		back_btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//new HomePage();
+				new HomePage(account, user);
 				f.dispose();
 			}
 		});
@@ -110,8 +112,11 @@ public class MoneyTransfer implements ActionListener {
 					if (action.equals("Deposit")) {
 						if (toAcc == "CHECKING") {
 							new_balance += Double.parseDouble(amount.getText()) + checking_balance;
+							
 							String deposit_withdraw_query = "UPDATE accounts SET balance = '"+new_balance+"' WHERE accounts.account_type = '"+toAcc+"' AND accounts.user = '"+user+"'";
 							stmt.executeUpdate(deposit_withdraw_query);
+							
+							String t1 = "";
 							
 							JOptionPane.showMessageDialog(f, "Deposit complete!");
 							

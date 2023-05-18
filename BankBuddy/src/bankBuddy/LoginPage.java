@@ -1,5 +1,6 @@
 package bankBuddy;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginPage {
 	
@@ -96,7 +99,7 @@ public class LoginPage {
 				f.dispose();
 			}
 		});	
-	}
+	};
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub		

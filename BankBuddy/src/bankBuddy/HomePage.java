@@ -2,6 +2,7 @@ package bankBuddy;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -46,9 +47,10 @@ public class HomePage {
 		statements = new JMenuItem("View Statements");
 		
 		mainFrame.setLayout(new BorderLayout());
-		mainFrame.setSize(400, 400);
+		mainFrame.setSize(500, 500);
 		
 		mainPanel.setLayout(new GridBagLayout());
+		mainPanel.setSize(500, 400);
 		
 		menuBar.setLayout(new BorderLayout());
 		menuBar.setPreferredSize(new Dimension(400, 50));
@@ -57,12 +59,14 @@ public class HomePage {
 		
 		// checking account
 		JLabel checking = new JLabel("<html><strong>Checking: </strong>'"+df.format(Double.parseDouble(checking_balance))+"'</html>");
+		checking.setFont(new Font("Arial", Font.PLAIN, 40));
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		mainPanel.add(checking, gbc);
 		
 		// saving account
 		JLabel saving = new JLabel("<html><strong>Saving: </strong>'"+df.format(Double.parseDouble(saving_balance))+"'</html>");
+		saving.setFont(new Font("Arial", Font.PLAIN, 40));
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		mainPanel.add(saving, gbc);
@@ -75,6 +79,8 @@ public class HomePage {
 		
 		accountActions.add(transfer_withdraw_deposit);
 		accountActions.add(statements);
+		
+		//mainPanel.setBackground(Color.BLUE);
 		
 		mainFrame.setVisible(true);	
 		
