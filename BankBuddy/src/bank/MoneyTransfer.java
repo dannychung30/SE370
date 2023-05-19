@@ -1,4 +1,4 @@
-package bankBuddy;
+package bank;
 import javax.swing.*;
 
 import java.awt.event.*;
